@@ -1,40 +1,36 @@
 import React from "react";
 
-// constante mensagem de boas-vindas
-const MensagemDeBoasVindas = () => {
-  return <h1>Bem-vindo ao Painel de Usuário!</h1>;
+const MensagemDeBoasVindas = ({ usuario }) => {
+  return <h2>🎉 Bem-vindo, {usuario}!</h2>;
 };
 
-// mensagem para fazer login
 const MensagemLogin = () => {
-  return <p>Por favor, faça login para continuar.</p>;
+  return <p>🔑 Por favor, faça login para continuar.</p>;
 };
 
-// componente principal que usa renderização condicional
-function PainelDeUsuario({ estaLogado }) {
-  // exemplo 01: operador ternário
-  const mensagem = estaLogado ? "Você está logado" : "Você não está logado";
+function PainelDeUsuario({ estaLogado, usuario, onLogin, onLogout }) {
+  const mensagem = estaLogado
+    ? "✅ Você está logado."
+    : "❌ Você não está logado.";
 
-  // exemplo 02: operador &&
-  const BotaoDeLogout = () => {
-    return estaLogado && <button>Logout</button>;
-  };
-
-  // exemplo 03: componentes separados
   const renderizarConteudo = () => {
     if (estaLogado) {
       return (
-        <div>
-          <MensagemDeBoasVindas />
-          <BotaoDeLogout />
+        <div style={styles.caixa}>
+          <MensagemDeBoasVindas usuario={usuario} />
+          <button style={styles.botaoLogout} onClick={onLogout}>
+            🚪 Logout
+          </button>
         </div>
       );
     } else {
       return (
-        <div>
+        <div style={styles.caixa}>
           <h2>Renderização Condicional</h2>
           <MensagemLogin />
-          <button>Login</button>
+          <button style={styles.botaoLogin} onClick={onLogin}>
+            🔓 Login
+          </button>
         </div>
       );
     }
@@ -47,5 +43,34 @@ function PainelDeUsuario({ estaLogado }) {
     </div>
   );
 }
+
+const styles = {
+  caixa: {
+    border: "1px solid #ccc",
+    padding: "20px",
+    borderRadius: "10px",
+    display: "inline-block",
+    marginTop: "10px",
+    backgroundColor: "#f9f9f9",
+  },
+  botaoLogin: {
+    backgroundColor: "#4CAF50",
+    color: "white",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    marginTop: "10px",
+  },
+  botaoLogout: {
+    backgroundColor: "#f44336",
+    color: "white",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    marginTop: "10px",
+  },
+};
 
 export default PainelDeUsuario;

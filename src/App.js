@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import PainelDeUsuario from "./components/PainelDeUsuario";
 
-export default function App() {
+function App() {
   const [estaLogado, setEstaLogado] = useState(false);
+  const [usuario] = useState("Guga");
+
+  const handleLogin = () => setEstaLogado(true);
+  const handleLogout = () => setEstaLogado(false);
 
   return (
     <div>
-      <PainelDeUsuario estaLogado={estaLogado} />
-      <button onClick={() => setEstaLogado(!estaLogado)}>
-        {estaLogado ? "Logout" : "Login"}
-      </button>
+      <PainelDeUsuario
+        estaLogado={estaLogado}
+        usuario={usuario}
+        onLogin={handleLogin}
+        onLogout={handleLogout}
+      />
     </div>
   );
 }
+
+export default App;
