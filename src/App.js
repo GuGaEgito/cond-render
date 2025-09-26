@@ -3,7 +3,7 @@ import PainelDeUsuario from "./components/PainelDeUsuario";
 
 function App() {
   const [estaLogado, setEstaLogado] = useState(false);
-  const [usuario] = useState("Guga");
+  const [usuario] = useState("Egito");
 
   const handleLogin = () => setEstaLogado(true);
   const handleLogout = () => setEstaLogado(false);
